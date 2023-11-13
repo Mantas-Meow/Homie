@@ -4,6 +4,7 @@ using Homie.API;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,12 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Homie.API.Migrations
 {
     [DbContext(typeof(HomieDbContext))]
-    partial class HomieDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231112222117_ItemAndPlace")]
+    partial class ItemAndPlace
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);

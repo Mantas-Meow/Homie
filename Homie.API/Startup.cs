@@ -14,6 +14,8 @@ namespace Homie.API
             Configuration = configuration;
         }
 
+        public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             IConfiguration configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
@@ -24,6 +26,10 @@ namespace Homie.API
                 options.UseSqlServer(connectionString));
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IItemRepository, ItemRepository>();
+            services.AddScoped<IPlaceService, PlaceService>();
+            services.AddScoped<IPlaceRepository, PlaceRepository>();
             services.AddScoped<IChoresService, ChoresService>();
             services.AddScoped<IChoresRepository, ChoresRepository>();
             services.AddTransient<HomieDbContext>();
@@ -33,7 +39,7 @@ namespace Homie.API
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+        { 
 
             app.UseSwagger();
             app.UseSwaggerUI();
