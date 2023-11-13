@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homie.API", "Homie.API\Homi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homie.Tests", "Tests\Homie.Tests.csproj", "{03F50E28-861D-4B41-A363-4A54A34297F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homie.Data", "Homie.Data\Homie.Data.csproj", "{3C445A2E-2BAB-47EE-8973-AB00D4A16F59}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{03F50E28-861D-4B41-A363-4A54A34297F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03F50E28-861D-4B41-A363-4A54A34297F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03F50E28-861D-4B41-A363-4A54A34297F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C445A2E-2BAB-47EE-8973-AB00D4A16F59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C445A2E-2BAB-47EE-8973-AB00D4A16F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C445A2E-2BAB-47EE-8973-AB00D4A16F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C445A2E-2BAB-47EE-8973-AB00D4A16F59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
