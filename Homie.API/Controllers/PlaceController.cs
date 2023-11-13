@@ -5,7 +5,7 @@ using Homie.API.DTOs.Place;
 namespace Homie.API.Controllers
 {
     [ApiController]
-    [Route("api/places")]
+    [Route("api/[controller]")]
     public class PlaceController : ControllerBase
     {
         private readonly IPlaceService _placeService;

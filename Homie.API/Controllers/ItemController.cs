@@ -6,7 +6,7 @@ using Homie.API.Services.Interfaces;
 namespace Homie.API.Controllers
 {
     [ApiController]
-    [Route("api/items")]
+    [Route("api/[controller]")]
     public class ItemController : ControllerBase
     {
         private readonly IItemService _itemService;
