@@ -18,9 +18,5 @@
             Furniture = furniture;
             Room = room;
         }
-
-        public PlaceResponseBody()
-        {
-        }
     }
 }

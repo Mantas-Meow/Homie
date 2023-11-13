@@ -25,17 +25,14 @@ namespace Homie.API.Services
             foreach (var item in repoItems)
             {
                 var place = _placeRepository.GetById(item.PlaceId);
-                var placeResponseBody = new PlaceResponseBody();
-                if (place != null)
+                if (place == null)
                 {
-                    placeResponseBody.Id = place.Id;
-                    placeResponseBody.PlaceName = place.PlaceName;
-                    placeResponseBody.Description = place.Description;
-                    placeResponseBody.Room = place.Room;
-                    placeResponseBody.Furniture = place.Furniture;
-                    placeResponseBody.LastUpdated = place.LastUpdated;
+                    items.Add(new ItemResponseBody(item.Id, item.ItemName, item.Description, null, item.LastUpdated, item.IsTaken));
+                } else
+                {
+                    items.Add(new ItemResponseBody(item.Id, item.ItemName, item.Description, new PlaceResponseBody(place.Id, place.PlaceName, place.Description, place.Room, place.Furniture, place.LastUpdated), item.LastUpdated, item.IsTaken));
                 }
-                items.Add(new ItemResponseBody(item.Id, item.ItemName, item.Description, placeResponseBody, item.LastUpdated, item.IsTaken));
+                
             }
             return items;
         }
@@ -49,17 +46,14 @@ namespace Homie.API.Services
             }
 
             var place = _placeRepository.GetById(item.PlaceId);
-            var placeResponseBody = new PlaceResponseBody();
-            if (place != null)
+            
+            if (place == null)
             {
-                placeResponseBody.Id = place.Id;
-                placeResponseBody.PlaceName = place.PlaceName;
-                placeResponseBody.Description = place.Description;
-                placeResponseBody.Room = place.Room;
-                placeResponseBody.Furniture = place.Furniture;
-                placeResponseBody.LastUpdated = place.LastUpdated;
+                return new ItemResponseBody(item.Id, item.ItemName, item.Description, null, item.LastUpdated, item.IsTaken);
             }
-            return new ItemResponseBody(item.Id, item.ItemName, item.Description, placeResponseBody, item.LastUpdated, item.IsTaken);
+
+            return new ItemResponseBody(item.Id, item.ItemName, item.Description, new PlaceResponseBody(place.Id, place.PlaceName, place.Description, place.Room, place.Furniture, place.LastUpdated), item.LastUpdated, item.IsTaken);
+            
         }
 
         public void AddItem(CreateItemRequestBody item)
