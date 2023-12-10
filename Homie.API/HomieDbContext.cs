@@ -1,5 +1,4 @@
 ﻿using Homie.API.Models;
-using Homie.Data.Migrations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Homie.API
