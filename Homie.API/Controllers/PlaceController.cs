@@ -16,16 +16,16 @@ namespace Homie.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetPlaces()
+        public async Task<IActionResult> GetPlaces()
         {
-            var places = _placeService.GetPlaces();
+            var places = await _placeService.GetPlaces();
             return Ok(places);
         }
 
         [HttpGet("{placeId}")]
-        public IActionResult GetPlace(Guid placeId)
+        public async Task<IActionResult> GetPlace(Guid placeId)
         {
-            var place = _placeService.GetPlaceById(placeId);
+            var place = await _placeService.GetPlaceById(placeId);
 
             if(place != null)
             {
@@ -38,23 +38,23 @@ namespace Homie.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPlace([FromBody] CreatePlaceRequestBody place)
+        public async Task<IActionResult> AddPlace([FromBody] CreatePlaceRequestBody place)
         {
-            _placeService.AddPlace(place);
+            await _placeService.AddPlace(place);
             return Ok();
         }
 
         [HttpPut("{placeId}")]
-        public IActionResult UpdatePlace(Guid placeId, [FromBody] UpdatePlaceRequestBody place)
+        public async Task<IActionResult> UpdatePlace(Guid placeId, [FromBody] UpdatePlaceRequestBody place)
         {
-            _placeService.UpdatePlace(placeId, place);
+            await _placeService.UpdatePlace(placeId, place);
             return Ok();
         }
 
         [HttpDelete("{placeId}")]
-        public IActionResult DeletePlace(Guid placeId)
+        public async Task<IActionResult> DeletePlace(Guid placeId)
         {
-            _placeService.DeletePlace(placeId);
+            await _placeService.DeletePlace(placeId);
             return Ok();
         }
     }
