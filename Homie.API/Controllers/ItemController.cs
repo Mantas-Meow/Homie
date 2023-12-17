@@ -17,16 +17,16 @@ namespace Homie.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetItems()
+        public async Task<IActionResult> GetItems()
         {
-            var items = _itemService.GetItems();
+            var items = await _itemService.GetItems();
             return Ok(items);
         }
 
         [HttpGet("{itemId}")]
-        public IActionResult GetItem(Guid itemId)
+        public async Task<IActionResult> GetItem(Guid itemId)
         {
-            var item = _itemService.GetItemById(itemId);
+            var item = await _itemService.GetItemById(itemId);
 
             if(item != null)
             {
@@ -48,37 +48,37 @@ namespace Homie.API.Controllers
 }
         */
         [HttpPost]
-        public IActionResult AddItem([FromBody] CreateItemRequestBody item)
+        public async Task<IActionResult> AddItem([FromBody] CreateItemRequestBody item)
         {
-            _itemService.AddItem(item);
+            await _itemService.AddItem(item);
             return Ok();
         }
 
         [HttpPut("{itemId}")]
-        public IActionResult UpdateItem(Guid itemId, [FromBody] UpdateItemRequestBody item)
+        public async Task<IActionResult> UpdateItem(Guid itemId, [FromBody] UpdateItemRequestBody item)
         {
-            _itemService.UpdateItem(itemId, item);
+            await _itemService.UpdateItem(itemId, item);
             return Ok();
         }
 
         [HttpDelete("{itemId}")]
-        public IActionResult DeleteItem(Guid itemId)
+        public async Task<IActionResult> DeleteItem(Guid itemId)
         {
-            _itemService.DeleteItem(itemId);
+            await _itemService.DeleteItem(itemId);
             return Ok();
         }
 
         [HttpPost("{itemId}/take")]
-        public IActionResult TakeItem(Guid itemId)
+        public async Task<IActionResult> TakeItem(Guid itemId)
         {
-            _itemService.TakeItem(itemId);
+            await _itemService.TakeItem(itemId);
             return Ok();
         }
 
         [HttpPost("{itemId}/move/{newPlaceId}")]
-        public IActionResult MoveItem(Guid itemId, Guid newPlaceId)
+        public async Task<IActionResult> MoveItem(Guid itemId, Guid newPlaceId)
         {
-            _itemService.MoveItem(itemId, newPlaceId);
+            await _itemService.MoveItem(itemId, newPlaceId);
             return Ok();
         }
     }
