@@ -36,7 +36,7 @@ namespace Homie.API.Repositories
 
         public List<ToDoListItem> GetToDoListItemsByDate(DateTime startDate, DateTime? endDate)
         {
-            return _context.ToDoListItems.Where(x => x.DateToDo >= startDate && x.DateToDo <= endDate)
+            return _context.ToDoListItems.Where(x => x.DateToDo >= startDate && x.DateToDo <= endDate || (x.DateToDo < startDate && x.IsCompleted == false))
                                          .OrderBy(x => x.DateToDo)
                                          .ToList();
         }

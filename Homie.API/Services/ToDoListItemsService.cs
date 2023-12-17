@@ -86,7 +86,7 @@ namespace Homie.API.Services
             }
 
             var toDoListItems = new List<GetToDoListItemResponseBody>();
-            for(int i = 0; i >= result.Count(); i++)
+            for(int i = 0; i < result.Count(); i++)
             {
                 var toDoListItem = new GetToDoListItemResponseBody()
                 {
