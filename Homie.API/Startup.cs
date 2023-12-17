@@ -8,12 +8,11 @@ namespace Homie.API
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -29,6 +28,8 @@ namespace Homie.API
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IPlaceService, PlaceService>();
             services.AddScoped<IPlaceRepository, PlaceRepository>();
+            services.AddScoped<IChoresService, ChoresService>();
+            services.AddScoped<IChoresRepository, ChoresRepository>();
             services.AddTransient<HomieDbContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllers();
@@ -50,6 +51,7 @@ namespace Homie.API
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
+
         }
     }
 }
