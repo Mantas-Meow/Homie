@@ -14,19 +14,19 @@ namespace Homie.API.Services
             _placeRepository = placeRepository;
         }
 
-        public List<PlaceResponseBody> GetPlaces()
+        public async Task<List<PlaceResponseBody>> GetPlaces()
         {
             var repoPlaces = _placeRepository.GetPlaces();
             var places = new List<PlaceResponseBody>();
 
             foreach (var place in repoPlaces)
             {
-                places.Add(new PlaceResponseBody(place.Id, place.PlaceName, place.Description, place.Room, place.Furniture, place.LastUpdated));
+               places.Add(new PlaceResponseBody(place.Id, place.PlaceName, place.Description, place.Room, place.Furniture, place.LastUpdated));
             }
             return places;
         }
 
-        public PlaceResponseBody? GetPlaceById(Guid placeId)
+        public async Task<PlaceResponseBody?> GetPlaceById(Guid placeId)
         {
             var place = _placeRepository.GetById(placeId);
             if (place == null)
@@ -36,12 +36,12 @@ namespace Homie.API.Services
             return new PlaceResponseBody(place.Id, place.PlaceName, place.Description, place.Room, place.Furniture, place.LastUpdated);
         }
 
-        public void AddPlace(CreatePlaceRequestBody place)
+        public async Task AddPlace(CreatePlaceRequestBody place)
         {
             _placeRepository.Add(new Place(place.PlaceName, place.Description, place.Room, place.Furniture, place.LastUpdated));
         }
 
-        public void UpdatePlace(Guid placeId, UpdatePlaceRequestBody place)
+        public async Task UpdatePlace(Guid placeId, UpdatePlaceRequestBody place)
         {
             var existingItem = _placeRepository.GetById(placeId);
             if (existingItem != null)
@@ -56,7 +56,7 @@ namespace Homie.API.Services
             }
         }
 
-        public void DeletePlace(Guid itemId)
+        public async Task DeletePlace(Guid itemId)
         {
             _placeRepository.Delete(itemId);
         }

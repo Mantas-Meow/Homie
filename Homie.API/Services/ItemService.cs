@@ -17,7 +17,7 @@ namespace Homie.API.Services
             _placeRepository = placeRepository;
         }
 
-        public List<ItemResponseBody> GetItems()
+        public async Task<List<ItemResponseBody>> GetItems()
         {
             var repoItems = _itemRepository.GetItems();
             var items = new List<ItemResponseBody>();
@@ -37,7 +37,7 @@ namespace Homie.API.Services
             return items;
         }
 
-        public ItemResponseBody? GetItemById(Guid itemId)
+        public async Task<ItemResponseBody?> GetItemById(Guid itemId)
         {
             var item = _itemRepository.GetById(itemId);
             if (item == null)
@@ -56,12 +56,12 @@ namespace Homie.API.Services
             
         }
 
-        public void AddItem(CreateItemRequestBody item)
+        public async Task AddItem(CreateItemRequestBody item)
         {
             _itemRepository.Add(new Item(item.ItemName, item.Description, item.PlaceId, item.LastUpdated, item.IsTaken));
         }
 
-        public void UpdateItem(Guid itemId, UpdateItemRequestBody item)
+        public async Task UpdateItem(Guid itemId, UpdateItemRequestBody item)
         {
             var existingItem = _itemRepository.GetById(itemId);
             if (existingItem != null)
@@ -76,12 +76,12 @@ namespace Homie.API.Services
             }
         }
 
-        public void DeleteItem(Guid itemId)
+        public async Task DeleteItem(Guid itemId)
         {
             _itemRepository.Delete(itemId);
         }
 
-        public void TakeItem(Guid itemId)
+        public async Task TakeItem(Guid itemId)
         {
             var existingItem = _itemRepository.GetById(itemId);
             if (existingItem != null)
@@ -92,7 +92,7 @@ namespace Homie.API.Services
             }
         }
 
-        public void MoveItem(Guid itemId, Guid newPlaceId)
+        public async Task MoveItem(Guid itemId, Guid newPlaceId)
         {
             var existingItem = _itemRepository.GetById(itemId);
             if (existingItem != null)

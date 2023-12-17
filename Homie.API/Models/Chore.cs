@@ -14,8 +14,6 @@
         Daily,
         Weekly,
         BiWeekly,
-        Montly,
-        EvenDays,
-        NotEvenDays
+        Montly
     }
 }

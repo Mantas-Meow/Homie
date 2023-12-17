@@ -4,12 +4,12 @@ namespace Homie.API.Services.Interfaces
 {
     public interface IItemService
     {
-        public List<ItemResponseBody> GetItems();
-        public void AddItem(CreateItemRequestBody item);
-        public ItemResponseBody? GetItemById(Guid itemId);
-        public void UpdateItem(Guid itemId, UpdateItemRequestBody item);
-        public void DeleteItem(Guid itemId);
-        public void TakeItem(Guid itemId);
-        public void MoveItem(Guid itemId, Guid newPlaceId);
+        public Task<List<ItemResponseBody>> GetItems();
+        public Task AddItem(CreateItemRequestBody item);
+        public Task<ItemResponseBody?> GetItemById(Guid itemId);
+        public Task UpdateItem(Guid itemId, UpdateItemRequestBody item);
+        public Task DeleteItem(Guid itemId);
+        public Task TakeItem(Guid itemId);
+        public Task MoveItem(Guid itemId, Guid newPlaceId);
     }
 }

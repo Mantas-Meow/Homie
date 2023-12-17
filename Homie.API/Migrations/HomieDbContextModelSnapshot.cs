@@ -46,6 +46,30 @@ namespace Homie.API.Migrations
                     b.ToTable("Chores");
                 });
 
+            modelBuilder.Entity("Homie.API.Models.Chore", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Frequency")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Chores");
+                });
+
             modelBuilder.Entity("Homie.API.Models.Food", b =>
                 {
                     b.Property<Guid>("Id")
