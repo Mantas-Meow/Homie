@@ -12,5 +12,7 @@ namespace Homie.API
         public DbSet<Chore> Chores { get; set;}
 
         public DbSet<ToDoListItem> ToDoListItems { get; set; }
+        public DbSet<Ingredient> Ingredient { get; set; }
+        public DbSet<Food> Food { get; set; }
     }
 }
