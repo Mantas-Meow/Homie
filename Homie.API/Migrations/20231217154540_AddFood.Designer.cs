@@ -4,6 +4,7 @@ using Homie.API;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Homie.API.Migrations
 {
     [DbContext(typeof(HomieDbContext))]
-    partial class HomieDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231217154540_AddFood")]
+    partial class AddFood
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,79 +46,7 @@ namespace Homie.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Chores");
-                });
-
-            modelBuilder.Entity("Homie.API.Models.Food", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ExpirationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FoodName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("IngredientAmount")
-                        .HasColumnType("real");
-
-                    b.Property<Guid?>("IngredientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("LastUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("PlaceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Food");
-                });
-
-            modelBuilder.Entity("Homie.API.Models.Ingredient", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<float?>("Calories")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Carbs")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("Fat")
-                        .HasColumnType("real");
-
-                    b.Property<string>("FoodName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("GramsPerServing")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Protein")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("ServingAmount")
-                        .HasColumnType("real");
-
-                    b.Property<string>("ServingDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Ingredient");
+                    b.ToTable("Chore");
                 });
 
             modelBuilder.Entity("Homie.API.Models.Item", b =>

@@ -30,6 +30,10 @@ namespace Homie.API
             services.AddScoped<IPlaceRepository, PlaceRepository>();
             services.AddScoped<IChoresService, ChoresService>();
             services.AddScoped<IChoresRepository, ChoresRepository>();
+            services.AddScoped<IFoodService, FoodService>();
+            services.AddScoped<IFoodRepository, FoodRepository>();
+            services.AddScoped<IIngredientService, IngredientService>();
+            services.AddScoped<IIngredientRepository, IngredientRepository>();
             services.AddTransient<HomieDbContext>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllers();
