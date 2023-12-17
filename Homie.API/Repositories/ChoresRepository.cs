@@ -41,5 +41,6 @@ namespace Homie.API.Repositories
             _context.SaveChanges();
             return choreToUpdate;
         }
+
     }
 }

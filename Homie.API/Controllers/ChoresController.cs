@@ -30,14 +30,6 @@ namespace Homie.API.Controllers
             return Ok(chore);
         }
 
-        [HttpGet]
-        [Route("choresItem/{id}")]
-        public async Task<IActionResult> GetChoresItem(Guid id)
-        {
-            var choreItem = await _choresService.GetChoreItem(id);
-            return Ok(choreItem);
-        }
-
         [HttpPost]
         public async Task<IActionResult> CreateChore(CreateChoreRequestBody choreToCreate)
         {
