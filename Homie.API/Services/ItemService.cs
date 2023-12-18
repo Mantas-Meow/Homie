@@ -102,5 +102,28 @@ namespace Homie.API.Services
                 _itemRepository.Update(existingItem);
             }
         }
+
+        public Task<List<GetItemsByPlaceResponseBody>> GetItemsByPlace(Guid placeId)
+        {
+            var results = _itemRepository.GetByPlaceId(placeId);
+            var items = new List<GetItemsByPlaceResponseBody>();
+
+            foreach (var r in results)
+            {
+                var item = new GetItemsByPlaceResponseBody()
+                {
+                    Id = r.Id,
+                    ItemName = r.ItemName,
+                    Description = r.Description,
+                    LastUpdated = r.LastUpdated,
+                    IsTaken = r.IsTaken
+                };
+
+                items.Add(item);
+
+            }
+
+            return Task.FromResult(items);
+        }
     }
 }

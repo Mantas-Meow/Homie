@@ -47,5 +47,10 @@ namespace Homie.API.Repositories
         {
             return _homieDbContext.Items.Find(itemId);
         }
+
+        public List<Item> GetByPlaceId(Guid placeId)
+        {
+            return _homieDbContext.Items.Where(x => x.PlaceId == placeId).OrderBy(x => x.ItemName).ToList();
+        }
     }
 }
