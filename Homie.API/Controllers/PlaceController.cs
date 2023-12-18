@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Homie.API.Services.Interfaces;
 using Homie.API.DTOs.Place;
+using Homie.API.Models;
 
 namespace Homie.API.Controllers
 {
@@ -9,10 +10,12 @@ namespace Homie.API.Controllers
     public class PlaceController : ControllerBase
     {
         private readonly IPlaceService _placeService;
+        private readonly IItemService _itemService;
 
-        public PlaceController(IPlaceService placeService)
+        public PlaceController(IPlaceService placeService, IItemService itemService)
         {
             _placeService = placeService;
+            _itemService = itemService;
         }
 
         [HttpGet]
@@ -56,6 +59,22 @@ namespace Homie.API.Controllers
         {
             await _placeService.DeletePlace(placeId);
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("{id}/Items")]
+        public async Task<IActionResult> GetItemsByPlace(Guid placeId)
+        {
+            var items = _itemService.GetItemsByPlace(placeId);
+
+            if (items != null)
+            {
+                return Ok(items);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }

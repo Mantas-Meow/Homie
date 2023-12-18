@@ -11,5 +11,7 @@ namespace Homie.API.Services.Interfaces
         public Task DeleteItem(Guid itemId);
         public Task TakeItem(Guid itemId);
         public Task MoveItem(Guid itemId, Guid newPlaceId);
+
+        public Task<List<GetItemsByPlaceResponseBody>> GetItemsByPlace(Guid placeId);
     }
 }
