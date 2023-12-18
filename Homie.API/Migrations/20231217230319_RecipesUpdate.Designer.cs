@@ -4,6 +4,7 @@ using Homie.API;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Homie.API.Migrations
 {
     [DbContext(typeof(HomieDbContext))]
-    partial class HomieDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231217230319_RecipesUpdate")]
+    partial class RecipesUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,22 +177,19 @@ namespace Homie.API.Migrations
 
             modelBuilder.Entity("Homie.API.Models.RecipeIngredient", b =>
                 {
-                    b.Property<Guid>("RecipesId")
+                    b.Property<Guid>("IngredientId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("IngredientId")
+                    b.Property<Guid?>("RecipesId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RecipesId1")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasKey("IngredientId");
 
-                    b.HasKey("RecipesId");
-
-                    b.HasIndex("RecipesId1");
+                    b.HasIndex("RecipesId");
 
                     b.ToTable("RecipeIngredient");
                 });
@@ -272,13 +272,9 @@ namespace Homie.API.Migrations
 
             modelBuilder.Entity("Homie.API.Models.RecipeIngredient", b =>
                 {
-                    b.HasOne("Homie.API.Models.Recipes", "Recipes")
+                    b.HasOne("Homie.API.Models.Recipes", null)
                         .WithMany("RecipeIngredients")
-                        .HasForeignKey("RecipesId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Recipes");
+                        .HasForeignKey("RecipesId");
                 });
 
             modelBuilder.Entity("Homie.API.Models.Recipes", b =>
