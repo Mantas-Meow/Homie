@@ -62,7 +62,7 @@ namespace Homie.API.Controllers
         }
 
         [HttpGet]
-        [Route("{id}/Items")]
+        [Route("{placeId}/Items")]
         public async Task<IActionResult> GetItemsByPlace(Guid placeId)
         {
             var items = _itemService.GetItemsByPlace(placeId);
