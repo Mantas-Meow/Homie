@@ -4,6 +4,7 @@ using Homie.API;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Homie.API.Migrations
 {
     [DbContext(typeof(HomieDbContext))]
-    partial class HomieDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231217213414_Recipes")]
+    partial class Recipes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,8 +65,8 @@ namespace Homie.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("IngredientAmount")
-                        .HasColumnType("float");
+                    b.Property<float?>("IngredientAmount")
+                        .HasColumnType("real");
 
                     b.Property<Guid?>("IngredientId")
                         .HasColumnType("uniqueidentifier");
@@ -85,30 +88,30 @@ namespace Homie.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double?>("Calories")
-                        .HasColumnType("float");
+                    b.Property<float?>("Calories")
+                        .HasColumnType("real");
 
-                    b.Property<double?>("Carbs")
-                        .HasColumnType("float");
+                    b.Property<float?>("Carbs")
+                        .HasColumnType("real");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("Fat")
-                        .HasColumnType("float");
+                    b.Property<float?>("Fat")
+                        .HasColumnType("real");
 
                     b.Property<string>("FoodName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("GramsPerServing")
-                        .HasColumnType("float");
+                    b.Property<float?>("GramsPerServing")
+                        .HasColumnType("real");
 
-                    b.Property<double?>("Protein")
-                        .HasColumnType("float");
+                    b.Property<float?>("Protein")
+                        .HasColumnType("real");
 
-                    b.Property<double?>("ServingAmount")
-                        .HasColumnType("float");
+                    b.Property<float?>("ServingAmount")
+                        .HasColumnType("real");
 
                     b.Property<string>("ServingDescription")
                         .HasColumnType("nvarchar(max)");
@@ -174,22 +177,19 @@ namespace Homie.API.Migrations
 
             modelBuilder.Entity("Homie.API.Models.RecipeIngredient", b =>
                 {
-                    b.Property<Guid>("RecipesId")
+                    b.Property<Guid>("IngredientId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
 
-                    b.Property<Guid>("IngredientId")
+                    b.Property<Guid?>("RecipesId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RecipesId1")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasKey("IngredientId");
 
-                    b.HasKey("RecipesId");
-
-                    b.HasIndex("RecipesId1");
+                    b.HasIndex("RecipesId");
 
                     b.ToTable("RecipeIngredient");
                 });
@@ -203,8 +203,8 @@ namespace Homie.API.Migrations
                     b.Property<int?>("Category")
                         .HasColumnType("int");
 
-                    b.Property<double?>("CookTime")
-                        .HasColumnType("float");
+                    b.Property<float?>("CookTime")
+                        .HasColumnType("real");
 
                     b.Property<string>("Directions")
                         .HasColumnType("nvarchar(max)");
@@ -212,11 +212,11 @@ namespace Homie.API.Migrations
                     b.Property<int?>("Dish")
                         .HasColumnType("int");
 
-                    b.Property<double?>("Portions")
-                        .HasColumnType("float");
+                    b.Property<float?>("Portions")
+                        .HasColumnType("real");
 
-                    b.Property<double?>("PrepTime")
-                        .HasColumnType("float");
+                    b.Property<float?>("PrepTime")
+                        .HasColumnType("real");
 
                     b.Property<string>("RecipeTitle")
                         .IsRequired()
@@ -225,17 +225,17 @@ namespace Homie.API.Migrations
                     b.Property<int?>("RecipeTypes")
                         .HasColumnType("int");
 
-                    b.Property<double?>("TotalCalories")
-                        .HasColumnType("float");
+                    b.Property<float?>("TotalCalories")
+                        .HasColumnType("real");
 
-                    b.Property<double?>("TotalCarbs")
-                        .HasColumnType("float");
+                    b.Property<float?>("TotalCarbs")
+                        .HasColumnType("real");
 
-                    b.Property<double?>("TotalFat")
-                        .HasColumnType("float");
+                    b.Property<float?>("TotalFat")
+                        .HasColumnType("real");
 
-                    b.Property<double?>("TotalProtein")
-                        .HasColumnType("float");
+                    b.Property<float?>("TotalProtein")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -272,13 +272,9 @@ namespace Homie.API.Migrations
 
             modelBuilder.Entity("Homie.API.Models.RecipeIngredient", b =>
                 {
-                    b.HasOne("Homie.API.Models.Recipes", "Recipes")
+                    b.HasOne("Homie.API.Models.Recipes", null)
                         .WithMany("RecipeIngredients")
-                        .HasForeignKey("RecipesId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Recipes");
+                        .HasForeignKey("RecipesId");
                 });
 
             modelBuilder.Entity("Homie.API.Models.Recipes", b =>
